@@ -1,10 +1,59 @@
-<
 <html>
 <head>
     <title>Agenda</title>
+    <style>
+        main{
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            background-color: aliceblue;
+            border: 1px solid black;
+            border-radius: 15px;
+            padding: 25px 50px;
+            max-width: 345px;
+            min-height: 400px;
+        }
+
+        body{
+            display: grid;
+            justify-content: center;
+            align-content: space-between;
+            margin-top: 40px;
+        }
+
+        *{
+            font-family: Arial;
+        }
+
+        li{
+            margin-top: 5px;
+        }
+
+        h4{
+            margin: 3px;
+        }
+
+        input{
+            margin: 5px;
+        }
+
+        form{
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        #enviar{
+            align-self: center;
+        }
+        p{
+            margin: 6px;
+        }
+    </style>
 </head>
 <body>
-
+<main>
+<h1>Agenda de contactos</h1>
 <form>
 
     <?php
@@ -14,21 +63,22 @@
 
     if (isset($_GET["submit"])) {
 
-        if (!empty($_GET["nombre"])) {
+        $nombre = array_filter($_GET["nombre"], function ($data) {
+            return $data !== "";
+        });
+        $telefono = array_filter($_GET["telefono"], function ($data) {
+            return $data !== "";
+        });
 
-            if (!empty($_GET["telefono"])) {
+        if (!empty($nombre)) {
 
-                valoresExisten();
-                $salida .= "<ul>";
-                foreach ($agenda as $nombre => $telefono) {
-                    $salida .= "<li>$nombre : $telefono</li>";
-                    echo "<input type='hidden' name='nombre[]' value='$nombre'>";
-                    echo "<input type='hidden' name='telefono[]' value='$telefono'>";
-                }
-                $salida .= '</ul>';
+            if (!empty($telefono)) {
+                $agenda = array_push_assoc($agenda, $nombre, $telefono);
+                imprimirDatos();
             } else {
                 array_push($errores, "Introduce un telefono");
             }
+
         } elseif (empty($_GET["telefono"])) {
             array_push($errores, 'Introduce un nombre y un telefono');
         } else {
@@ -36,36 +86,45 @@
         }
 
         foreach ($errores as $value) {
-            echo $value;
+            echo "$value <br>";
         }
     }
-
     ?>
 
-    <input type="text" name="nombre[]"/>
-    <input type="text" name="telefono[]"/>
-    <input type="submit" name="submit" value="Enviar"/>
+    <p>Nombre: </p><input type="text" name="nombre[]"/>
+    <p>Telefono: </p> <input type="text" name="telefono[]"/>
+    <input id="enviar" type="submit" name="submit" value="Enviar"/>
 </form>
+<?php
+if (empty($agenda)){
+    echo '<h4>Lista de contactos vacia</h4>';
+}else{
+    echo '<h4>Lista de contactos:</h4>';
+}
+    ?>
+<?= $salida ?>
 
-<?=$salida?>
-
+</main>
 <?php
 
 function array_push_assoc($array, $key, $value)
 {
-
     for ($i = 0; $i < count($key); $i++) {
         $array[$key[$i]] = $value[$i];
     }
     return $array;
 }
 
-function valoresExisten()
+function imprimirDatos()
 {
-    global $agenda;
-    $nombre = $_GET["nombre"];
-    $telefono = $_GET["telefono"];
-    $agenda = array_push_assoc($agenda, $nombre, $telefono);
+    global $salida, $agenda;
+    $salida .= "<ul>";
+    foreach ($agenda as $nombre => $telefono) {
+        $salida .= "<li>$nombre : $telefono</li>";
+        echo "<input type='hidden' name='nombre[]' value='$nombre'>";
+        echo "<input type='hidden' name='telefono[]' value='$telefono'>";
+    }
+    $salida .= '</ul>';
 }
 
 ?>

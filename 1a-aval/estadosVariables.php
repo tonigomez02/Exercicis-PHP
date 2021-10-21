@@ -66,7 +66,6 @@ foreach ($arratValores as $valorArray){
     $salida .= "<tr><td>var = $variable</td><td>$return_configurada</td> <td>$return_vacia</td> <td>$return_booleana</td> </tr>";
 }
 $salida .= "</table>";
-echo "<p>configurada($variable)</p>";
 echo $salida;
 
 
