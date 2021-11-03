@@ -1,4 +1,3 @@
-
 <p>Array original:</p>
 <?php
 error_reporting(0);
@@ -13,7 +12,7 @@ while ($ocurrencias !== 0) {
     for ($i = 0; $i < count($array); $i++) {
         $valorActual = $array[$i];
         $valorSiguiente = $array[$i + 1];
-        if ($valorActual > $valorSiguiente && !is_null($valorSiguiente)){
+        if ($valorActual > $valorSiguiente && !is_null($valorSiguiente)) {
             $ocurrencias++;
             $array[$i] = $valorSiguiente;
             $array[$i + 1] = $valorActual;
@@ -26,10 +25,11 @@ while ($ocurrencias !== 0) {
 <?php imprimirArray($array); ?>
 
 <?php
-function imprimirArray ($array){
+function imprimirArray($array)
+{
     global $salida;
     $salida .= "<span>";
-    foreach ($array as $value){
+    foreach ($array as $value) {
         $salida .= "$value ";
     }
     echo $salida;
