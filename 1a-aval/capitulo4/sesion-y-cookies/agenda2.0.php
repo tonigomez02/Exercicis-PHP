@@ -1,6 +1,6 @@
 <?php
 
-    session_start();
+session_start();
 
 ?>
 
@@ -23,7 +23,7 @@
     </form>
 
     <?php
-        error_reporting(0);
+    error_reporting(0);
 
     if (isset($_GET["submit"])) {
 
@@ -34,15 +34,15 @@
 
         if (!empty($nombre)) {
             if (!empty($telefono)) {
-                if (array_key_exists($nombre, $agenda)){
-                    echo 'Contacto actualizado';
-                }else{
+                if (array_key_exists($nombre, $agenda)) {
+                    echo 'Contacto actualizado' . "<br>";
+                } else {
                     echo "Contacto añadido" . "<br>";
                 }
                 $_SESSION["agenda"] = array_push_assoc($_SESSION["agenda"], $nombre, $telefono);
-            } else if (array_key_exists($nombre, $agenda)) {
-                unset($agenda[$nombre]);
-                echo 'Contacto eliminado';
+            } else if (array_key_exists($nombre, $_SESSION["agenda"])) {
+                unset($_SESSION["agenda"][$nombre]);
+                echo 'Contacto eliminado' . "<br>";
             } else {
                 array_push($errores, 'Introduce un telefono');
             }
@@ -55,18 +55,25 @@
         foreach ($errores as $value) {
             echo "$value <br>";
         }
-        foreach ($_SESSION["agenda"] as $key => $value) {
-            echo  "$key : $value" . "<br>";
-        }
-
+        imprimirDatos();
+    }else{
+        imprimirDatos();
     }
 
-    function array_push_assoc($array, $key, $value){
+    function array_push_assoc($array, $key, $value)
+    {
         $array[$key] = $value;
         return $array;
     }
 
- //   session_destroy()
+    function imprimirDatos()
+    {
+        foreach ($_SESSION["agenda"] as $key => $value) {
+            echo "$key : $value" . "<br>";
+        }
+    }
+
+    //   session_destroy()
     ?>
 </main>
 </body>
