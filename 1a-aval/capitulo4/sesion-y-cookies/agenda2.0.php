@@ -39,7 +39,7 @@ session_start();
                 } else {
                     echo "Contacto añadido" . "<br>";
                 }
-                $_SESSION["agenda"] = array_push_assoc($_SESSION["agenda"], $nombre, $telefono);
+                $_SESSION["agenda"][$nombre] = $telefono;
             } else if (array_key_exists($nombre, $_SESSION["agenda"])) {
                 unset($_SESSION["agenda"][$nombre]);
                 echo 'Contacto eliminado' . "<br>";
@@ -58,12 +58,6 @@ session_start();
         imprimirDatos();
     }else{
         imprimirDatos();
-    }
-
-    function array_push_assoc($array, $key, $value)
-    {
-        $array[$key] = $value;
-        return $array;
     }
 
     function imprimirDatos()
