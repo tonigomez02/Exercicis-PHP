@@ -19,6 +19,7 @@
 - Chapter 4: Sessions and cookies
     - Phonebook 2.0 (with sessions)
     - Cookies counter
+    - Upload files with form
 
 ## Author
 
