@@ -8,10 +8,8 @@
 </head>
 <body>
 <?php
-phpinfo();
 error_log(0);
 if (isset($_COOKIE["veces"])) {
-    setcookie("user", "Toni Gómex", time() - 3600, "/");
     setcookie("veces", $_COOKIE[ "veces" ] + 1,);
     echo "Numero de visitas: " . $_COOKIE["veces"];
 } else {

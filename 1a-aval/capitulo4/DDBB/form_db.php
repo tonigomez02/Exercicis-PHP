@@ -1,10 +1,8 @@
 <?php /** @noinspection ALL */
 require("ddbb connection.php");
-$conn = mysqli_connect($db_host, $db_user, $db_password, $db_name);
 
-if (mysqli_errno($conn)){
-    "Error en la conexiom";
-}
+$con = new PDO("mysql:host={$host};dbname={$db_name}", $username, $password);
+
 ?>
 
 <!doctype html>

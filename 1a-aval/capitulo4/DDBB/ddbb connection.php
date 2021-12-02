@@ -6,9 +6,9 @@
     die("Error: " . $exception->getMessage() );
 }*/
 
- $db_host = "localhost";
- $db_name = "php_login_system";
- $db_user = "root";
- $db_password = "tonigomez";
+$host = "localhost:3309";
+$db_name = "php_login_system";
+$username = "root";
+$password = "tonigomez";
 
 
