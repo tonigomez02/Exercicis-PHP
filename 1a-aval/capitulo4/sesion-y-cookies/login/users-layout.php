@@ -6,7 +6,6 @@ if (!isset($_COOKIE["usuario"]) && isset($_SESSION["nombre"])) {
 } else if (!isset($_SESSION["usuario"]) && !isset($_COOKIE["usuario"])) {
     header("location: login.php");
 }
-$_SESSION["nombre"] = $_COOKIE["usuario"];
 ?>
 
 <div>

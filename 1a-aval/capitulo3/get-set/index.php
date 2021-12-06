@@ -1,10 +1,12 @@
 <?php
 
 spl_autoload_register(function ($clase) {
-    include 'clases/' . $clase . '.php';
+    include __DIR__ . '/clases/' . $clase . '.php';
 });
 
 $obj1 = new A();
+$obj2 = new MethodTest();
+echo get_class($obj1);
 $obj1->publica = 4;
 echo "El valor de la variable publica es: " . $obj1->publica . "\n";
 $obj1->protegida = 5;

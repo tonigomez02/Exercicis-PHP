@@ -33,9 +33,9 @@ session_start();
         if (!empty($nombre)) {
             if (!empty($telefono)) {
                 if (array_key_exists($nombre, $agenda)) {
-                    echo 'Contacto actualizado' . "<br>";
+                    echo '<p>Contacto actualizado</p>' . "<br>";
                 } else {
-                    echo "Contacto añadido" . "<br>";
+                    echo '<p>Contacto añadido</p>' . "<br>";
                 }
                 $_SESSION["agenda"][$nombre] = $telefono;
             } else if (array_key_exists($nombre, $_SESSION["agenda"])) {
@@ -64,8 +64,6 @@ session_start();
             echo "$key : $value" . "<br>";
         }
     }
-
-    //   session_destroy()
     ?>
 </main>
 </body>
